@@ -1,2 +1,2 @@
 # RoyGBiv
-A desktop app created in SE 300 that allows a user...
+
