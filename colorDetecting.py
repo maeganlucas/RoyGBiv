@@ -9,13 +9,18 @@ import pyscreeze
 
 screen = pyscreeze.screenshot()
 
+#Takes x-coordinate of desired pixel
 x = int(input("Please enter the x coordinate of the pixel: "))
+#Takes y-coordinate of desired pixel
 y = int(input("Please enter the y coordinate of the pixel: "))
 
+#Determines the RGB values of the pixel
 rgb = PIL.ImageGrab.grab().load()[x, y]
 
+#Prints the RGB value
 print(rgb)
 
+#Determines if the RGB value is pure red, blue, or green
 if rgb == (255, 0, 0):
     print("\nRed")
 elif rgb == (0, 255, 0):
