@@ -2,6 +2,7 @@ import customtkinter
 import customtkinter as ctk
 import tkinter as tk
 
+
 # Create root window
 
 ctk.set_appearance_mode("dark")
@@ -52,6 +53,8 @@ def rs_button_event():
     print("Range Selection Button Selected:")
 
 
+
+
 # Upper Left Frame
 frame_UpL = ctk.CTkFrame(master=root, width=frame_width, height=frame_height, corner_radius=15)
 frame_UpL.grid(row=0, column=0)
@@ -88,7 +91,7 @@ frame_LoL = ctk.CTkFrame(master=root, width=frame_width, height=frame_height, co
 frame_LoL.grid(row=1, column=0)
 
 label1LoL = ctk.CTkLabel(master=frame_LoL, text="Import Photo to Filter", text_font=("Times New Roman", -20))
-entryVAR = tk.StringVar(0)
+entryVAR = tk.StringVar()
 entry = ctk.CTkEntry(master=frame_LoL, corner_radius=10, placeholder_text="directory:", textvariable=entryVAR)
 button = ctk.CTkButton(master=frame_LoL, text="Confirm", corner_radius=8, command=import_button_event)
 
@@ -100,7 +103,7 @@ button.pack(pady=12, padx=10)
 frame_LoR = ctk.CTkFrame(master=root, width=frame_width, height=frame_height, corner_radius=15)
 frame_LoR.grid(row=1, column=1)
 
-rdbVAR = tk.IntVar(0)
+rdbVAR = tk.IntVar()
 radiobutton_1LoR = ctk.CTkRadioButton(master=frame_LoR, text="Choice1", command=radiobutton_event,
                                       variable=rdbVAR, value=1)
 radiobutton_2LoR = ctk.CTkRadioButton(master=frame_LoR, text="Choice2", command=radiobutton_event,
