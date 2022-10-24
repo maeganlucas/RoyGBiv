@@ -1,29 +1,421 @@
-from colour import Color
+from webcolors import rgb_to_name
+    # https://medium.com/codex/rgb-to-color-names-in-python-the-robust-way-ec4a9d97a01f
+
+#from rangeSelection import getResult
+from rangeSelection import rangeSelector
 
 import PIL
 from PIL import ImageGrab
     # https://stackoverflow.com/questions/42636933/get-rgb-value-from-screen-pixels-with-python
 
-import pyscreeze
-    # https://stackoverflow.com/questions/42636933/get-rgb-value-from-screen-pixels-with-python
+# Color counter variables
+red_count = 0
+green_count = 0
+blue_count = 0
+black_count = 0
+gray_count = 0
+purple_count = 0
+yellow_count = 0
+orange_count = 0
+white_count = 0
+brown_count = 0
+pink_count = 0
 
-screen = pyscreeze.screenshot()
+#Detect color function definition
+def detect_color():
+    #Calls rangeSelector function and sets it to selected range
+    selectedRange = rangeSelector()
+    #Determines the starting location of the range
+    startX = selectedRange[0][0]
+    startY = selectedRange[0][1]
+    #Determines the ending location of the range
+    endX = selectedRange[1][0]
+    endY = selectedRange[1][1]
+    #Determines the range of x of the selected range
+    xRange = endX - startX
+    #Determines the range of y of the selected range
+    yRange = endY - startY
+    #Determines how many pixels are in the selected range
+    range_size = xRange * yRange
+    #Gets the RGB values of each pixel in the range and sends it to be counted
+    for x in range(startX, endX):
+        for y in range(startY, endY):
+            rgb = PIL.ImageGrab.grab().load()[x, y]
+            named_color = rgb_to_name(rgb, spec='css3')
+            count_color(named_color)
 
-#Takes x-coordinate of desired pixel
-x = int(input("Please enter the x coordinate of the pixel: "))
-#Takes y-coordinate of desired pixel
-y = int(input("Please enter the y coordinate of the pixel: "))
+    #Calls the function to print the color breakdown
+    printBreakdown()
+    #Calls the function to print the color average
+    average(range_size)
 
-#Determines the RGB values of the pixel
-rgb = PIL.ImageGrab.grab().load()[x, y]
+#Count color function definition, takes variable named_color
+def count_color(named_color):
+    #Includes the global variables
+    global red_count
+    global green_count
+    global blue_count
+    global black_count
+    global gray_count
+    global purple_count
+    global yellow_count
+    global orange_count
+    global white_count
+    global brown_count
+    global pink_count
 
-#Prints the RGB value
-print(rgb)
+    #Shows the program is running...will be removed later
+    print("Running...")
 
-#Determines if the RGB value is pure red, blue, or green
-if rgb == (255, 0, 0):
-    print("\nRed")
-elif rgb == (0, 255, 0):
-    print("\nGreen")
-elif rgb == (0, 0, 255):
-    print("\nBlue")
+    #Determines what color to count the pixel towards
+    if named_color == "black":
+        black_count += 1
+    elif named_color == "silver":
+        gray_count += 1
+    elif named_color == "gray":
+        gray_count += 1
+    elif named_color == "white":
+        white_count += 1
+    elif named_color == "maroon":
+        red_count += 1
+    elif named_color == "red":
+        red_count += 1
+    elif named_color == "purple":
+        purple_count += 1
+    elif named_color == "fuchsia":
+        purple_count += 1
+    elif named_color == "green":
+        green_count += 1
+    elif named_color == "lime":
+        green_count += 1
+    elif named_color == "olive":
+        green_count += 1
+    elif named_color == "yellow":
+        yellow_count += 1
+    elif named_color == "navy":
+        blue_count += 1
+    elif named_color == "blue":
+        blue_count += 1
+    elif named_color == "teal":
+        blue_count += 1
+    elif named_color == "aqua":
+        blue_count += 1
+    elif named_color == "aliceblue":
+        blue_count += 1
+    elif named_color == "antiquewhite":
+        white_count += 1
+    elif named_color == "aquamarine":
+        blue_count += 1
+    elif named_color == "azure":
+        blue_count += 1
+    elif named_color == "beige":
+        white_count += 1
+    elif named_color == "bisque":
+        white_count += 1
+    elif named_color == "blanchealmond":
+        white_count += 1
+    elif named_color == "blueviolet":
+        purple_count += 1
+    elif named_color == "brown":
+        brown_count += 1
+    elif named_color == "burlywood":
+        brown_count += 1
+    elif named_color == "cadetblue":
+        blue_count += 1
+    elif named_color == "chartreuse":
+        green_count += 1
+    elif named_color == "chocolate":
+        brown_count += 1
+    elif named_color == "coral":
+        orange_count += 1
+    elif named_color == "cornflowerblue":
+        blue_count += 1
+    elif named_color == "cornsilk":
+        white_count += 1
+    elif named_color == "crimson":
+        red_count += 1
+    elif named_color == "cyan":
+        blue_count += 1
+    elif named_color == "darkblue":
+        blue_count += 1
+    elif named_color == "darkcyan":
+        blue_count += 1
+    elif named_color == "darkgoldenrod":
+        brown_count += 1
+    elif named_color == "darkgray":
+        gray_count += 1
+    elif named_color == "darkgreen":
+        green_count += 1
+    elif named_color == "darkkhaki":
+        yellow_count += 1
+    elif named_color == "darkmagenta":
+        purple_count += 1
+    elif named_color == "darkolivegreen":
+        green_count += 1
+    elif named_color == "darkorange":
+        orange_count += 1
+    elif named_color == "darkorchid":
+        purple_count += 1
+    elif named_color == "darkred":
+        red_count += 1
+    elif named_color == "darksalmon":
+        red_count += 1
+    elif named_color == "darkseagreen":
+        green_count += 1
+    elif named_color == "darkslateblue":
+        blue_count += 1
+    elif named_color == "darkslategray":
+        green_count += 1
+    elif named_color == "darkturquoise":
+        blue_count += 1
+    elif named_color == "darkviolet":
+        purple_count += 1
+    elif named_color == "deeppink":
+        pink_count += 1
+    elif named_color == "deepskyblue":
+        blue_count += 1
+    elif named_color == "dimgray":
+        gray_count += 1
+    elif named_color == "dodgerblue":
+        blue_count += 1
+    elif named_color == "firebrick":
+        red_count += 1
+    elif named_color == "floralwhite":
+        white_count += 1
+    elif named_color == "forestgreen":
+        green_count += 1
+    elif named_color == "gainsboro":
+        gray_count += 1
+    elif named_color == "ghostwhite":
+        white_count += 1
+    elif named_color == "gold":
+        yellow_count += 1
+    elif named_color == "goldenrod":
+        yellow_count += 1
+    elif named_color == "greenyellow":
+        green_count += 1
+    elif named_color == "honeydew":
+        green_count += 1
+    elif named_color == "hotpink":
+        pink_count += 1
+    elif named_color == "indianred":
+        red_count += 1
+    elif named_color == "indigo":
+        blue_count += 1
+    elif named_color == "ivory":
+        white_count += 1
+    elif named_color == "khaki":
+        yellow_count += 1
+    elif named_color == "lavender":
+        purple_count += 1
+    elif named_color == "lavenderblush":
+        pink_count += 1
+    elif named_color == "lawngreen":
+        green_count += 1
+    elif named_color == "lemonchiffon":
+        yellow_count += 1
+    elif named_color == "lightblue":
+        blue_count += 1
+    elif named_color == "lightcoral":
+        red_count += 1
+    elif named_color == "lightcyan":
+        blue_count += 1
+    elif named_color == "lightgoldenrodyellow":
+        yellow_count += 1
+    elif named_color == "lightgray":
+        gray_count += 1
+    elif named_color == "lightgreen":
+        green_count += 1
+    elif named_color == "lightpink":
+        pink_count += 1
+    elif named_color == "lightsalmon":
+        orange_count += 1
+    elif named_color == "lightseagreen":
+        green_count += 1
+    elif named_color == "lightskyblue":
+        blue_count += 1
+    elif named_color == "lightslategray":
+        gray_count += 1
+    elif named_color == "lightsteelblue":
+        blue_count += 1
+    elif named_color == "lightyellow":
+        yellow_count += 1
+    elif named_color == "limegreen":
+        green_count += 1
+    elif named_color == "linen":
+        white_count += 1
+    elif named_color == "magenta":
+        purple_count += 1
+    elif named_color == "mediumaquamarine":
+        green_count += 1
+    elif named_color == "mediumblue":
+        blue_count += 1
+    elif named_color == "mediumorchid":
+        purple_count += 1
+    elif named_color == "mediumpurple":
+        purple_count += 1
+    elif named_color == "mediumseagreen":
+        green_count += 1
+    elif named_color == "gainsboro":
+        gray_count += 1
+    elif named_color == "lemonchiffon":
+        yellow_count += 1
+    elif named_color == "mediumslateblue":
+        purple_count += 1
+    elif named_color == "mediumspringgreen":
+        green_count += 1
+    elif named_color == "mediumturqoise":
+        blue_count += 1
+    elif named_color == "mediumvioletred":
+        pink_count += 1
+    elif named_color == "midnightblue":
+        blue_count += 1
+    elif named_color == "mintcream":
+        white_count += 1
+    elif named_color == "mistyrose":
+        pink_count += 1
+    elif named_color == "moccasin":
+        yellow_count += 1
+    elif named_color == "navajowhite":
+        brown_count += 1
+    elif named_color == "oldlace":
+        white_count += 1
+    elif named_color == "olivedrab":
+        green_count += 1
+    elif named_color == "orangered":
+        orange_count += 1
+    elif named_color == "orchid":
+        purple_count += 1
+    elif named_color == "palegoldenrod":
+        yellow_count += 1
+    elif named_color == "palegreen":
+        green_count += 1
+    elif named_color == "paleturquoise":
+        blue_count += 1
+    elif named_color == "palevioletred":
+        pink_count += 1
+    elif named_color == "papayawhip":
+        yellow_count += 1
+    elif named_color == "peachpuff":
+        brown_count += 1
+    elif named_color == "peru":
+        brown_count += 1
+    elif named_color == "pink":
+        pink_count += 1
+    elif named_color == "rebeccapurple":
+        purple_count += 1
+    elif named_color == "rosybrown":
+        brown_count += 1
+    elif named_color == "royalblue":
+        blue_count += 1
+    elif named_color == "saddlebrown":
+        brown_count += 1
+    elif named_color == "salmon":
+        pink_count += 1
+    elif named_color == "sandybrown":
+        orange_count += 1
+    elif named_color == "seagreen":
+        green_count += 1
+    elif named_color == "seashell":
+        white_count += 1
+    elif named_color == "sienna":
+        brown_count += 1
+    elif named_color == "skyblue":
+        blue_count += 1
+    elif named_color == "slateblue":
+        blue_count += 1
+    elif named_color == "slategray":
+        gray_count += 1
+    elif named_color == "snow":
+        white_count += 1
+    elif named_color == "springgreen":
+        green_count += 1
+    elif named_color == "steelblue":
+        blue_count += 1
+    elif named_color == "tan":
+        brown_count += 1
+    elif named_color == "teal":
+        green_count += 1
+    elif named_color == "thistle":
+        purple_count += 1
+    elif named_color == "tomato":
+        red_count += 1
+    elif named_color == "turquoise":
+        blue_count += 1
+    elif named_color == "violet":
+        purple_count += 1
+    elif named_color == "wheat":
+        brown_count += 1
+    elif named_color == "whitesmoke":
+        white_count += 1
+    elif named_color == "yellowgreen":
+        green_count += 1
+
+#Print breakdown function definition
+def printBreakdown():
+    #Includes the global variables
+    global red_count
+    global green_count
+    global blue_count
+    global black_count
+    global gray_count
+    global purple_count
+    global yellow_count
+    global orange_count
+    global white_count
+    global brown_count
+    global pink_count
+
+    #Prints the color breakdown
+    print("COLOR BREAKDOWN:")
+    print("Red Count: ", red_count)
+    print("Orange Count: ", orange_count)
+    print("Yellow Count: ", yellow_count)
+    print("Green Count: ", green_count)
+    print("Blue Count: ", blue_count)
+    print("Pink Count: ", pink_count)
+    print("Purple Count: ", purple_count)
+    print("Black Count: ", black_count)
+    print("White Count: ", white_count)
+    print("Brown Count: ", brown_count)
+
+#Average function definition, takes variable range_size
+def average(range_size):
+    #Includes global variables
+    global red_count
+    global yellow_count
+    global orange_count
+    global pink_count
+    global purple_count
+    global green_count
+    global white_count
+    global brown_count
+    global black_count
+
+    #Determines the percent of each color in the selected range
+    red_average = (red_count / range_size) * 100
+    orange_average = (orange_count / range_size) * 100
+    yellow_average = (yellow_count / range_size) * 100
+    pink_average = (pink_count / range_size) * 100
+    white_average = (white_count / range_size) * 100
+    black_average = (black_count / range_size) * 100
+    blue_average = (blue_count / range_size) * 100
+    purple_average = (purple_count / range_size) * 100
+    brown_average = (brown_count / range_size) * 100
+    green_average = (green_count / range_size) * 100
+
+    #Prints the percentages
+    print("\nCOLOR PERCENTAGE:")
+    print("Red: ", round(red_average, 2),"%")
+    print("Orange: ", round(orange_average, 2),"%")
+    print("Yellow: ", round(yellow_average, 2),"%")
+    print("Pink: ", round(pink_average, 2),"%")
+    print("White: ", round(white_average, 2),"%")
+    print("Black: ", round(black_average, 2),"%")
+    print("Blue: ", round(blue_average, 2),"%")
+    print("Purple: ", round(purple_average, 2),"%")
+    print("Brown: ", round(brown_average, 2),"%")
+    print("Green: ", round(green_average, 2), "%")
+
+#Calls the detect_color function
+detect_color()
