@@ -3,6 +3,7 @@ import numpy
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import PIL
+from PIL import Image
 from PIL import ImageGrab
 import sys
 
