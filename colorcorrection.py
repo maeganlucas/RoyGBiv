@@ -2,7 +2,8 @@ import cv2
 import numpy
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from PIL import Image
+import PIL
+from PIL import ImageGrab
 import sys
 
 # color correction citation from:
@@ -21,11 +22,13 @@ deutranopia = 0.0  # unable to perceive red light
 protanopia = 1.0 # unable to perceive green light
 tritanopia = 0
 
-imgCorrected = numpy.array(Image.open("example.jpg")) / 255
+#imgCorrected = numpy.array(Image.open("example.jpg")) / 255
+imgCorrected = numpy.array(PIL.ImageGrab.grab()) / 255
 transform = colorCorrectionDP(protanopia=protanopia, deutranopia=deutranopia)
 img_corrected = numpy.uint8(numpy.dot(imgCorrected, transform) * 255)
 # Correcting Image for Deutranopia with diagnosed degree of 1.0 and saving the image to file.
 
 
 cv2.imwrite("colorchange.jpg", img_corrected)
+
 
