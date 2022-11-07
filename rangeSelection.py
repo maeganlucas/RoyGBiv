@@ -49,19 +49,19 @@ def escClose(event):
     root.destroy()
 
 
-left_side = tkinter.Frame(master=root, width=10, height=root.current_height, cursor="fleur")
+left_side = tkinter.Frame(master=root, width=10, height=root.current_height, cursor="sb_h_double_arrow")
 left_side.place(x=0, y=0)
 left_side.bind('<B1-Motion>', resize_left)
 
-right_side = tkinter.Frame(master=root, width=10, height=root.current_height, cursor="fleur")
+right_side = tkinter.Frame(master=root, width=10, height=root.current_height, cursor="sb_h_double_arrow")
 right_side.place(x=root.current_width - 10, y=0)
 right_side.bind('<B1-Motion>', resize_right)
 
-top_side = tkinter.Frame(master=root, width=root.current_width, height=10, cursor="fleur")
+top_side = tkinter.Frame(master=root, width=root.current_width, height=10, cursor="sb_v_double_arrow")
 top_side.place(x=0, y=0)
 top_side.bind('<B1-Motion>', resize_top)
 
-bottom_side = tkinter.Frame(master=root, width=root.current_width, height=10, cursor="fleur")
+bottom_side = tkinter.Frame(master=root, width=root.current_width, height=10, cursor="sb_v_double_arrow")
 bottom_side.place(x=0, y=root.current_height - 10)
 bottom_side.bind('<B1-Motion>', resize_bottom)
 
