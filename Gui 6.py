@@ -90,11 +90,26 @@ class App(ctk.CTk):
         sl3.place(relx=0.14, rely=0.62, anchor=tk.CENTER)
 
         # Filter Sliders
-        d_slider = ctk.CTkSlider(master=self.filter_frame, width=250, height=25, from_=0, to=1, number_of_steps=1000)
+        def slider_action1(label_value1):
+            label_value1 = round(d_slider.get(), 4)
+            num_1.configure(text=str(label_value1))
+
+        def slider_action2(label_value2):
+            label_value2 = round(p_slider.get(), 4)
+            num_2.configure(text=str(label_value2))
+
+        def slider_action3(label_value):
+            label_value3 = round(t_slider.get(), 4)
+            num_3.configure(text=str(label_value3))
+
+        d_slider = ctk.CTkSlider(master=self.filter_frame, width=250, height=25, from_=0, to=1, number_of_steps=1000,
+                                 command=slider_action1)
         d_slider.set(0)
-        p_slider = ctk.CTkSlider(master=self.filter_frame, width=250, height=25, from_=0, to=1, number_of_steps=1000)
+        p_slider = ctk.CTkSlider(master=self.filter_frame, width=250, height=25, from_=0, to=1, number_of_steps=1000,
+                                 command=slider_action2)
         p_slider.set(0)
-        t_slider = ctk.CTkSlider(master=self.filter_frame, width=250, height=25, from_=0, to=1, number_of_steps=1000)
+        t_slider = ctk.CTkSlider(master=self.filter_frame, width=250, height=25, from_=0, to=1, number_of_steps=1000,
+                                 command=slider_action3)
         t_slider.set(0)
         d_slider.place(relx=0.61, rely=0.32, anchor=tk.CENTER)
         p_slider.place(relx=0.61, rely=0.47, anchor=tk.CENTER)
@@ -258,9 +273,8 @@ class App(ctk.CTk):
         def rs_button_event():
             # ------------------------------------- Connal's Code ------------------------------------------------------
             areaCorners = [[], []]
-            rs_win = ctk.CTk()
+            rs_win = ctk.CTkToplevel(sf_win)
             rs_win.overrideredirect(True)
-            rs_win.resizable(True, True)
             rs_win.geometry("400x400")
 
             rs_win.attributes("-alpha", 0.5)
@@ -306,6 +320,10 @@ class App(ctk.CTk):
                                [rs_win.winfo_x() + rs_win.current_width, rs_win.winfo_y() + rs_win.current_height]]
                 print([[rs_win.winfo_x(), rs_win.winfo_y()],
                        [rs_win.winfo_x() + rs_win.current_width, rs_win.winfo_y() + rs_win.current_height]])
+                diagram_frame = ctk.CTkFrame(master=screen_frame, width=(rs_win.winfo_x() + rs_win.current_width)*0.5,
+                                             height=(rs_win.winfo_y() + rs_win.current_height)*0.5, fg_color='white',
+                                             bg_color='white')
+                diagram_frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
                 rs_win.destroy()
 
             def escClose(event):
@@ -346,14 +364,12 @@ class App(ctk.CTk):
         rs_button = ctk.CTkRadioButton(master=sf_frame, text="Range Selection Filter", corner_radius=6,
                                        command=rs_button_event)
         # Screen Diagram Frame
-        screen_frame = ctk.CTkFrame(master=sf_frame, width=850, height=400, corner_radius=10)
-
-        # command=pf_confirm_event2)
+        screen_frame = ctk.CTkFrame(master=sf_frame, width=950, height=500, corner_radius=10)
 
         screen_frame.place(relx=0.5, rely=0.55, anchor=tk.CENTER)
-        title_sf.place(relx=0.5, rely=0.1, anchor=tk.CENTER)
-        fs_button.place(relx=0.2, rely=0.2, anchor=tk.CENTER)
-        rs_button.place(relx=0.8, rely=0.2, anchor=tk.CENTER)
+        title_sf.place(relx=0.5, rely=0.05, anchor=tk.CENTER)
+        fs_button.place(relx=0.2, rely=0.12, anchor=tk.CENTER)
+        rs_button.place(relx=0.8, rely=0.12, anchor=tk.CENTER)
 
         sf_win.mainloop()
 
@@ -439,11 +455,10 @@ class App(ctk.CTk):
         window_x4 = 1050
         window_y4 = 650
 
-        tf_win = tk.Toplevel(width=window_x4, height=window_y4, bg='dark grey')
+        tf_win = ctk.CTkToplevel(width=window_x4, height=window_y4)
         tf_win.title("Select Filter")
-        tf_win.resizable(False, False)
 
-        tf_frame = ctk.CTkFrame(master=tf_win, width=window_x4, height=window_y4, corner_radius=15)
+        tf_frame = ctk.CTkFrame(master=tf_win, width=window_x4, height=window_y4)
         tf_frame.grid(row=1, column=0)
 
         # Title Label
@@ -455,21 +470,45 @@ class App(ctk.CTk):
         my_img = ImageTk.PhotoImage(Image.open("example.jpg"))
         lbl = tkinter.Label(master=tf_frame, image=my_img)
 
-        # Color Sliders
-        d_slider = ctk.CTkSlider(master=tf_frame, width=300, height=25, from_=0, to=1, number_of_steps=1000)
+        # Filter Sliders
+        def slider_action1(label_value1):
+            label_value1 = round(d_slider.get(), 4)
+            num_1.configure(text=str(label_value1))
+
+        def slider_action2(label_value2):
+            label_value2 = round(p_slider.get(), 4)
+            num_2.configure(text=str(label_value2))
+
+        def slider_action3(label_value):
+            label_value3 = round(t_slider.get(), 4)
+            num_3.configure(text=str(label_value3))
+
+        d_slider = ctk.CTkSlider(master=tf_win, width=250, height=25, from_=0, to=1, number_of_steps=1000,
+                                 command=slider_action1)
         d_slider.set(0)
-        p_slider = ctk.CTkSlider(master=tf_frame, width=300, height=25, from_=0, to=1, number_of_steps=1000)
+        p_slider = ctk.CTkSlider(master=tf_win, width=250, height=25, from_=0, to=1, number_of_steps=1000,
+                                 command=slider_action2)
         p_slider.set(0)
-        t_slider = ctk.CTkSlider(master=tf_frame, width=300, height=25, from_=0, to=1, number_of_steps=1000)
+        t_slider = ctk.CTkSlider(master=tf_win, width=250, height=25, from_=0, to=1, number_of_steps=1000,
+                                 command=slider_action3)
         t_slider.set(0)
 
         # Slider Labels
         sl1 = ctk.CTkLabel(master=tf_frame, width=10, height=10, text="Deuteranopia",
-                           text_font=("Times New Roman", -30))
+                           text_font=("STIXVariants", -30))
         sl2 = ctk.CTkLabel(master=tf_frame, width=10, height=10, text="Protanopia",
-                           text_font=("Times New Roman", -30))
+                           text_font=("STIXVariants", -30))
         sl3 = ctk.CTkLabel(master=tf_frame, width=10, height=10, text="Tritanopia",
-                           text_font=("Times New Roman", -30))
+                           text_font=("STIXVariants", -30))
+        num_1 = ctk.CTkLabel(master=tf_frame, width=10, height=10, text=str(0),
+                             text_font=("STIXVariants", -25))
+        num_2 = ctk.CTkLabel(master=tf_frame, width=10, height=10, text=str(0),
+                             text_font=("STIXVariants", -25))
+        num_3 = ctk.CTkLabel(master=tf_frame, width=10, height=10, text=str(0),
+                             text_font=("STIXVariants", -25))
+        num_1.place(relx=0.68, rely=0.77, anchor=tk.CENTER)
+        num_2.place(relx=0.68, rely=0.84, anchor=tk.CENTER)
+        num_3.place(relx=0.68, rely=0.91, anchor=tk.CENTER)
 
         # Confirm Button
         def apply():
@@ -480,17 +519,6 @@ class App(ctk.CTk):
             tritanopia = round(t_slider.get(), 4)
             print("Inputted Slider Values:" + ", d: " + str(deutranopia) + ", p: " + str(protanopia) +
                   ", t: " + str(tritanopia))
-
-            # Set Slider Labels
-            num_1 = ctk.CTkLabel(master=tf_frame, width=10, height=10, text=str(deutranopia),
-                                 text_font=("Times New Roman", -30))
-            num_2 = ctk.CTkLabel(master=tf_frame, width=10, height=10, text=str(protanopia),
-                                 text_font=("Times New Roman", -30))
-            num_3 = ctk.CTkLabel(master=tf_frame, width=10, height=10, text=str(tritanopia),
-                                 text_font=("Times New Roman", -30))
-            num_1.place(relx=0.75, rely=0.77, anchor=tk.CENTER)
-            num_2.place(relx=0.75, rely=0.84, anchor=tk.CENTER)
-            num_3.place(relx=0.75, rely=0.91, anchor=tk.CENTER)
             # ------------------------------------------Matthews Code---------------------------------------------------
 
             def colorCorrectionDP(protanopia, deutranopia):
@@ -529,4 +557,3 @@ class App(ctk.CTk):
 if __name__ == "__main__":
     app = App()
     app.start()
-    
