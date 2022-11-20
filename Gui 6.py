@@ -180,7 +180,9 @@ class App(ctk.CTk):
 
             def save_to_file():
                 val_str = str(values).replace(' ', '')
-                data_format1 = name_entry.get() + " " + val_str
+                n = name_entry.get()
+                n2 = n.replace(' ', '')
+                data_format1 = n2 + " " + val_str
                 data_format = data_format1.replace('[', '').replace(']', '')
                 file = open("test saved filter.txt", "a")
                 file.write("\n")
