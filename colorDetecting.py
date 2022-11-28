@@ -6,7 +6,7 @@ from webcolors import hex_to_rgb
 from scipy.spatial import KDTree
 
 #from rangeSelection import getResult
-from rangeSelection import rangeSelector
+from rangeSelection import getAreaCorners
 
 import PIL
 from PIL import ImageGrab
@@ -31,7 +31,8 @@ range_size = 0
 #Detect color function definition
 def detect_color():
     #Calls rangeSelector function and sets it to selected range
-    selectedRange = rangeSelector()
+
+    selectedRange = getAreaCorners()
     #Determines the starting location of the range
     startX = selectedRange[0][0]
     startY = selectedRange[0][1]
