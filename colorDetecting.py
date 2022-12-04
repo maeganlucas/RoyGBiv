@@ -6,7 +6,7 @@ from webcolors import hex_to_rgb
 from scipy.spatial import KDTree
 
 #from rangeSelection import getResult
-from rangeSelection import rangeSelector
+from rangeSelection import getAreaCorners
 
 import PIL
 from PIL import ImageGrab
@@ -31,7 +31,7 @@ range_size = 0
 #Detect color function definition
 def detect_color():
     #Calls rangeSelector function and sets it to selected range
-    selectedRange = rangeSelector()
+    selectedRange = getAreaCorners()
     #Determines the starting location of the range
     startX = selectedRange[0][0]
     startY = selectedRange[0][1]
@@ -48,11 +48,7 @@ def detect_color():
     #Gets the RGB values of each pixel in the range and sends it to be counted
     for x in range(startX, endX):
         for y in range(startY, endY):
-            try:
                 rgb = PIL.ImageGrab.grab().load()[x, y]
-                named_color = rgb_to_name(rgb, spec='css3')
-                count_color(named_color)
-            except Exception:
                 name_database = webcolors.CSS3_HEX_TO_NAMES
                 names = []
                 rgb_values = []
@@ -64,12 +60,6 @@ def detect_color():
 
                 distance, index = database_dt.query(rgb)
                 count_color(f'{names[index]}')
-
-
-    #Calls the function to print the color breakdown
-
-    #Calls the function to print the color average
-
 
 #Count color function definition, takes variable named_color
 def count_color(named_color):
@@ -86,7 +76,7 @@ def count_color(named_color):
     global brown_count
     global pink_count
 
-    #Shows the program is running...will be removed later
+    #Shows the program is running
     print("Running...")
 
     #Determines what color to count the pixel towards
@@ -387,7 +377,8 @@ def printBreakdown():
     global white_count
     global brown_count
     global pink_count
-
+    
+    #Adds the color counts to the color count array
     count_array.append(("Red", red_count))
     count_array.append(("Orange", orange_count))
     count_array.append(("Yellow", yellow_count))
@@ -437,6 +428,7 @@ def average(range_size):
     brown_average = (brown_count / range_size) * 100
     green_average = (green_count / range_size) * 100
 
+    #Adds the percentages to the color average array
     average_array.append(("Red", red_average))
     average_array.append(("Yellow", yellow_average))
     average_array.append(("Pink", pink_average))
@@ -463,5 +455,7 @@ def average(range_size):
 
 #Calls the detect_color function
 detect_color()
+#Calls the printBreakdown function to show pixel breakdown to user
 printBreakdown()
+#Calls the average function to show color percentages to the user
 average(range_size)
