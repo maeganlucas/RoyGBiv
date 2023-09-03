@@ -27,7 +27,7 @@ To filter an image, click _Filter a Photo_ from the menu on the right. A screen 
 ### Color Detection
 To detect the color(s) of a range of the screen, select the _Detect Color_ button from the menu on the right. A color detection screen will appear with instructions, the current status of color detection, and an area to see the color breakdown on the right. Click _Breakdown_ and select a range by manipulating the size and position of the range selection box and click _Select Range_ when finished. Roy G. Biv will then begin detecting the color(s) of the selected area.
 
-**_WARNING: Do not interact with any Roy G. Biv windows while the color is being dected (or has a status of Running)_**
+**_WARNING: Do not interact with any Roy G. Biv windows while the color is being detected (or has a status of Running)_**
 
 Once the program is done detecting the color(s) of the range you will be able to see the breakdown printed on the right. It will show the count colors based on pixel and the percentage of each color within the range. 
 
