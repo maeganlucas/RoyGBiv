@@ -1,5 +1,5 @@
-# RoyGBiv
-Roy G Biv is a desktop application created for users with color-blindness of any form. It allows users to filter part or all of their screen, filter imported pictures, and detect the color(s) of a desired range on their screen. Roy G. Biv comes preloaded with filter values for tritanopia (blue), deuteranopia (green), and protanopia (red), but also allows users to customize the filter to what works best for them!
+# Roy G. Biv
+Roy G. Biv is a desktop application created for users with color-blindness of any form. It allows users to filter part or all of their screen, filter imported pictures, and detect the color(s) of a desired range on their screen. Roy G. Biv comes preloaded with filter values for tritanopia (blue), deuteranopia (green), and protanopia (red), but also allows users to customize the filter to what works best for them!
 
 ## Features
 ### Contents
